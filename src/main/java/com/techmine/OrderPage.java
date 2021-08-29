@@ -15,8 +15,16 @@
  */
 package com.techmine;
 
+import java.util.Optional;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.LambdaModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
@@ -24,6 +32,41 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
  * @author Cedric Pemberton
  */
 public class OrderPage extends WebPage {
+
+    private Form<Void> form;
+    private TextField clientName;
+    private TextField itemName;
+    private TextField quantity;
+    private AjaxFallbackButton submit;
+    private FeedbackPanel feedback;
+
+    private String clientNameValue;
+    private String itemNameValue;
+    private String quantityValue;
+
+    public String getClientNameValue() {
+        return clientNameValue;
+    }
+
+    public void setClientNameValue(String clientNameValue) {
+        this.clientNameValue = clientNameValue;
+    }
+
+    public String getItemNameValue() {
+        return itemNameValue;
+    }
+
+    public void setItemNameValue(String itemNameValue) {
+        this.itemNameValue = itemNameValue;
+    }
+
+    public String getQuantityValue() {
+        return quantityValue;
+    }
+
+    public void setQuantityValue(String quantityValue) {
+        this.quantityValue = quantityValue;
+    }
 
     public OrderPage() {
     }
@@ -34,6 +77,44 @@ public class OrderPage extends WebPage {
 
     public OrderPage(PageParameters parameters) {
         super(parameters);
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize(); //To change body of generated methods, choose Tools | Templates.
+
+        form = new Form<Void>("order") {
+            @Override
+            protected void onSubmit() {
+                super.onSubmit(); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        };
+        add(form);
+        clientName = (TextField) new TextField("clientName", LambdaModel.of(this::getClientNameValue, this::setClientNameValue)).setRequired(true).setLabel(Model.of("Client Name"));
+        form.add(clientName);
+        itemName = new TextField("itemName", LambdaModel.of(this::getItemNameValue, this::setItemNameValue));
+        form.add(itemName);
+        quantity = new TextField("quantity", LambdaModel.of(this::getQuantityValue, this::setQuantityValue));
+        form.add(quantity);
+        submit = new AjaxFallbackButton("submit", form) {
+            @Override
+            protected void onSubmit(Optional<AjaxRequestTarget> target) {
+                super.onSubmit(target);
+            }
+
+            @Override
+            protected void onError(Optional<AjaxRequestTarget> target) {
+                super.onError(target); //To change body of generated methods, choose Tools | Templates.
+                target.get().add(feedback);
+            }
+        };
+
+        form.add(submit);
+
+        feedback = (FeedbackPanel) new FeedbackPanel("feedback").setOutputMarkupId(true);
+        add(feedback);
+
     }
 
 }

@@ -25,15 +25,16 @@
 
     <body>
         <!-- your content here... -->
-        <form id="order">
+        <div wicket:id="feedback"></div>
+        <form wicket:id="order">
             <div class="container">
                 <div class="title">
                     <h2>Order</h2>
                 </div>
                 <div class="separator">
 
-                    <label class="txtLabel"> Name</label>
-                    <input wicket:id="name" class="inputField" type="text">
+                    <label class="txtLabel"> Your Name</label>
+                    <input wicket:id="clientName" class="inputField" type="text">
 
                 </div>
                 <div class="separator">
@@ -48,20 +49,20 @@
                 </div>
                 <div class="separator">
                     <label class="txtLabel"> Item Name</label>
-                    <input id="name" class="inputField" type="text">
+                    <input wicket:id="itemName" class="inputField" type="text">
                 </div>
 
 
                 <div class="separator">
                     <label class="txtLabel"> Quantity</label>
-                    <input id="quantity" class="inputField" type="text">
+                    <input wicket:id="quantity" class="inputField" type="text">
 
                 </div>
 
 
 
                 <div class="separator action">
-                    <button id="submit" class="btn-submit add ">Place Order</button>
+                    <button wicket:id="submit" class="btn-submit add ">Place Order</button>
                     <button id="cancel" class="btn-submit cancel "> Cancel</button>
 
                 </div>
