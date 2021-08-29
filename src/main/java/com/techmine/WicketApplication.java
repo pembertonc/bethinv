@@ -1,5 +1,6 @@
 package com.techmine;
 
+import org.apache.commons.collections4.OrderedBidiMap;
 import org.apache.wicket.csp.CSPDirective;
 import org.apache.wicket.csp.CSPDirectiveSrcValue;
 import org.apache.wicket.markup.html.WebPage;
@@ -19,7 +20,8 @@ public class WicketApplication extends WebApplication {
     @Override
     public Class<? extends WebPage> getHomePage() {
         //return HomePage.class;
-        return Entry.class;
+        // return Entry.class;
+        return OrderPage.class;
     }
 
     /**
@@ -34,7 +36,6 @@ public class WicketApplication extends WebApplication {
                 .add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.SELF)
                 .add(CSPDirective.STYLE_SRC, "https://fonts.googleapis.com/css")
                 .add(CSPDirective.FONT_SRC, "https://fonts.gstatic.com");
-
         // add your configuration here
     }
 }
