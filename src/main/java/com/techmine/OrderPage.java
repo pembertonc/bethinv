@@ -15,10 +15,13 @@
  */
 package com.techmine;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -31,7 +34,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
  *
  * @author Cedric Pemberton
  */
-public class OrderPage extends WebPage {
+public class OrderPage extends BaseUnAuthenticatedPage {
 
     private Form<Void> form;
     private TextField clientName;
@@ -43,6 +46,27 @@ public class OrderPage extends WebPage {
     private String clientNameValue;
     private String itemNameValue;
     private String quantityValue;
+    private String selectedCategory;
+    private List<String> categories;
+    private DropDownChoice category;
+
+    private String categoryValue;
+
+    public String getCategoryValue() {
+        return categoryValue;
+    }
+
+    public void setCategoryValue(String categoryValue) {
+        this.categoryValue = categoryValue;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
 
     public String getClientNameValue() {
         return clientNameValue;
@@ -114,6 +138,13 @@ public class OrderPage extends WebPage {
 
         feedback = (FeedbackPanel) new FeedbackPanel("feedback").setOutputMarkupId(true);
         add(feedback);
+
+        categories = Arrays.asList("Food", "Clothing", "Cosmetics", "Miscellaneous", "Toys");
+        //When displaying a non trival list for say a list of objects we need to use an implmentation IChoiceRender.
+        // Wicket comes with a default implmentation of IChoiceRender call ChoiceRender.  it takes two strigs in its construction
+        // the first identifies the feild to be displayed the second indiecates the feild to be used as the indiex.  in the option.
+        category = new DropDownChoice("category", LambdaModel.of(this::getCategoryValue, this::setCategoryValue), categories);
+        form.add(category);
 
     }
 

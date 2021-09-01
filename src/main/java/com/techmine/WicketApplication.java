@@ -35,6 +35,7 @@ public class WicketApplication extends WebApplication {
         getCspSettings().blocking()
                 .add(CSPDirective.STYLE_SRC, CSPDirectiveSrcValue.SELF)
                 .add(CSPDirective.STYLE_SRC, "https://fonts.googleapis.com/css")
+                .add(CSPDirective.STYLE_SRC, "../../../webapp/style.css")
                 .add(CSPDirective.FONT_SRC, "https://fonts.gstatic.com");
         // add your configuration here
     }

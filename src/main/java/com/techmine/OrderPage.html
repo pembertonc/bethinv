@@ -2,73 +2,64 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
     <head>
-        <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-            <title>Stock Inventory Order Page</title>
-            <meta name="description" content="A simple HTML5 Template for new projects."/>
-            <meta name="author" content="SitePoint"/>
+        <title>Stock Inventory Order Page</title>
 
-            <meta property="og:title" content="A Basic HTML5 Template"/>
-            <meta property="og:type" content="website"/>
-            <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/"/>
-            <meta property="og:description" content="A simple HTML5 Template for new projects."/>
-            <meta property="og:image" content="image.png"/>
-
-            <link rel="icon" href="/favicon.ico"/>
-            <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-            <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-            <link href="../../../webapp/style.css" rel="stylesheet" type="text/css"/>
-            <!--link rel="stylesheet" href="C:\Users\bethy\Desktop\style.css"/-->
+        <link href="../../../webapp/style.css" rel="stylesheet" type="text/css"/>
+        <!--link rel="stylesheet" href="C:\Users\bethy\Desktop\style.css"/-->
 
     </head>
 
     <body>
-        <!-- your content here... -->
-        <div wicket:id="feedback"></div>
-        <form wicket:id="order">
-            <div class="container">
-                <div class="title">
-                    <h2>Order</h2>
+        <wicket:extend>
+            <!-- your content here... -->
+            <div wicket:id="feedback"></div>
+            <form wicket:id="order">
+                <div class="container">
+                    <div class="title">
+                        <h2>Order</h2>
+                    </div>
+                    <div class="separator">
+
+                        <label class="txtLabel"> Your Name</label>
+                        <input wicket:id="clientName" class="inputField" type="text">
+
+                    </div>
+                    <div class="separator">
+                        <label class="txtLabel"> Category of Item</label>
+                        <select wicket:id="category" class="selectField" name="category">
+                            <option selected="selected">Select a type </option>
+                            <option value="1"> Food</option>
+                            <option value="2"> Clothing</option>
+                            <option value="3"> Cosmetic and Beauty</option>
+                            <option value="4"> Miscellaneous</option>
+                        </select>
+                    </div>
+                    <div class="separator">
+                        <label class="txtLabel"> Item Name</label>
+                        <input wicket:id="itemName" class="inputField" type="text">
+                    </div>
+
+
+                    <div class="separator">
+                        <label class="txtLabel"> Quantity</label>
+                        <input wicket:id="quantity" class="inputField" type="text">
+
+                    </div>
+
+
+
+                    <div class="separator action">
+                        <button wicket:id="submit" class="btn-submit add ">Place Order</button>
+                        <button id="cancel" class="btn-submit cancel "> Cancel</button>
+
+                    </div>
+
                 </div>
-                <div class="separator">
-
-                    <label class="txtLabel"> Your Name</label>
-                    <input wicket:id="clientName" class="inputField" type="text">
-
-                </div>
-                <div class="separator">
-                    <label class="txtLabel"> Category of Item</label>
-                    <select class="selectField" name="category">
-                        <option selected="selected">Select a type </option>
-                        <option value="1"> Food</option>
-                        <option value="2"> Clothing</option>
-                        <option value="3"> Cosmetic and Beauty</option>
-                        <option value="4"> Miscellaneous</option>
-                    </select>
-                </div>
-                <div class="separator">
-                    <label class="txtLabel"> Item Name</label>
-                    <input wicket:id="itemName" class="inputField" type="text">
-                </div>
-
-
-                <div class="separator">
-                    <label class="txtLabel"> Quantity</label>
-                    <input wicket:id="quantity" class="inputField" type="text">
-
-                </div>
-
-
-
-                <div class="separator action">
-                    <button wicket:id="submit" class="btn-submit add ">Place Order</button>
-                    <button id="cancel" class="btn-submit cancel "> Cancel</button>
-
-                </div>
-
-            </div>
-        </form>
-        <script src="js/scripts.js"></script>
+            </form>
+            <script src="js/scripts.js"></script>
+        </wicket:extend>
     </body>
 </html>
