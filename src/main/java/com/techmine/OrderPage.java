@@ -15,6 +15,7 @@
  */
 package com.techmine;
 
+import com.techmine.bethInv.dto.OrderDTO;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,7 @@ public class OrderPage extends BaseUnAuthenticatedPage {
     private DropDownChoice category;
 
     private String categoryValue;
+    private OrderDTO order;
 
     public String getCategoryValue() {
         return categoryValue;
@@ -93,6 +95,7 @@ public class OrderPage extends BaseUnAuthenticatedPage {
     }
 
     public OrderPage() {
+        order = new OrderDTO();
     }
 
     public OrderPage(IModel<?> model) {
@@ -115,11 +118,11 @@ public class OrderPage extends BaseUnAuthenticatedPage {
 
         };
         add(form);
-        clientName = (TextField) new TextField("clientName", LambdaModel.of(this::getClientNameValue, this::setClientNameValue)).setRequired(true).setLabel(Model.of("Client Name"));
+        clientName = (TextField) new TextField("clientName", LambdaModel.of(order::getCustomName, order::setCustomName)).setRequired(true).setLabel(Model.of("Client Name"));
         form.add(clientName);
-        itemName = new TextField("itemName", LambdaModel.of(this::getItemNameValue, this::setItemNameValue));
+        itemName = new TextField("itemName", LambdaModel.of(order::getItemName, order::setItemName));
         form.add(itemName);
-        quantity = new TextField("quantity", LambdaModel.of(this::getQuantityValue, this::setQuantityValue));
+        quantity = new TextField("quantity", LambdaModel.of(order::getQuantity, order::setQuantity));
         form.add(quantity);
         submit = new AjaxFallbackButton("submit", form) {
             @Override
@@ -143,7 +146,7 @@ public class OrderPage extends BaseUnAuthenticatedPage {
         //When displaying a non trival list for say a list of objects we need to use an implmentation IChoiceRender.
         // Wicket comes with a default implmentation of IChoiceRender call ChoiceRender.  it takes two strigs in its construction
         // the first identifies the feild to be displayed the second indiecates the feild to be used as the indiex.  in the option.
-        category = new DropDownChoice("category", LambdaModel.of(this::getCategoryValue, this::setCategoryValue), categories);
+        category = new DropDownChoice("category", LambdaModel.of(order::getCategory, order::setCategory), categories);
         form.add(category);
 
     }
