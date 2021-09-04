@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -30,6 +32,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.ContextRelativeResourceReference;
 
 /**
  *
@@ -150,5 +153,11 @@ public class OrderPage extends BaseUnAuthenticatedPage {
         form.add(category);
 
     }
-
+    /*
+    @Override
+    public void renderHead(IHeaderResponse response) {
+    ContextRelativeResourceReference resource = new ContextRelativeResourceReference("resources/css/style.css");
+    CssHeaderItem cssHeaderItem = CssHeaderItem.forReference(resource);
+    response.render(cssHeaderItem);
+    }*/
 }
