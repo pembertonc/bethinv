@@ -15,9 +15,12 @@
  */
 package com.techmine;
 
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.ContextRelativeResourceReference;
 
 /**
  *
@@ -34,6 +37,15 @@ public class BaseUnAuthenticatedPage extends WebPage {
 
     public BaseUnAuthenticatedPage(PageParameters parameters) {
         super(parameters);
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        ContextRelativeResourceReference resource = new ContextRelativeResourceReference("resources/css/style.css");
+        CssHeaderItem cssHeaderItem = CssHeaderItem.forReference(resource);
+        response.render(cssHeaderItem);
+        cssHeaderItem = CssHeaderItem.forUrl("https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold");
+        response.render(cssHeaderItem);
     }
 
 }

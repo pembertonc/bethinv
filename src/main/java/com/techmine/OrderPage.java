@@ -153,11 +153,5 @@ public class OrderPage extends BaseUnAuthenticatedPage {
         form.add(category);
 
     }
-    /*
-    @Override
-    public void renderHead(IHeaderResponse response) {
-    ContextRelativeResourceReference resource = new ContextRelativeResourceReference("resources/css/style.css");
-    CssHeaderItem cssHeaderItem = CssHeaderItem.forReference(resource);
-    response.render(cssHeaderItem);
-    }*/
+
 }
