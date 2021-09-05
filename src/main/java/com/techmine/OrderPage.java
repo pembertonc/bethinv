@@ -15,30 +15,32 @@
  */
 package com.techmine;
 
+import com.techmine.bethInv.bo.OrderManager;
 import com.techmine.bethInv.dto.OrderDTO;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import javax.inject.Inject;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
-import org.apache.wicket.markup.head.CssHeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LambdaModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.ContextRelativeResourceReference;
 
 /**
  *
  * @author Cedric Pemberton
  */
 public class OrderPage extends BaseUnAuthenticatedPage {
+
+    @Inject
+    private OrderManager om;
 
     private Form<Void> form;
     private TextField clientName;
@@ -125,12 +127,13 @@ public class OrderPage extends BaseUnAuthenticatedPage {
         form.add(clientName);
         itemName = new TextField("itemName", LambdaModel.of(order::getItemName, order::setItemName));
         form.add(itemName);
-        quantity = new TextField("quantity", LambdaModel.of(order::getQuantity, order::setQuantity));
+        quantity = new NumberTextField("quantity", LambdaModel.of(order::getQuantity, order::setQuantity));
         form.add(quantity);
         submit = new AjaxFallbackButton("submit", form) {
             @Override
             protected void onSubmit(Optional<AjaxRequestTarget> target) {
                 super.onSubmit(target);
+                om.createOrder(order);
             }
 
             @Override

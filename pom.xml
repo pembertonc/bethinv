@@ -101,6 +101,12 @@
                 <scope>test</scope>
         </dependency>
         -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>8.0.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <resources>
